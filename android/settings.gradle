@@ -1,0 +1,3 @@
+rootProject.name = 'BestProject'
+
+include ':app'
