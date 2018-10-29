@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import { View, StatusBar, Platform, ProgressBarAndroid, ProgressViewIOS, Text, 
-  StyleSheet, Image, Button } from 'react-native'
+import { View, StatusBar, Platform, Text, StyleSheet, Image } from 'react-native'
 import MyCarousel from './Component/Carousel/Carousel'
 import fetchData from './Api/Api'
 import processingData from './Processing/Processing'
@@ -10,8 +9,11 @@ import {
   storeCarouselHome, storeListImageHome
 } from './Store/Store'
 import { Provider } from 'react-redux'
-import Login from './Component/Login/Login';
-const IS_IOS = Platform.OS === 'ios';
+import Login from './Component/Login/Login'
+import CustomCSSGlobal from './Component/CustomCSSGlobal/CustomCSSGlobal'
+import HomeScreen from './Views/HomeScreen';
+import AppNavigator from './Component/Navigation/DrawerNavigation/DrawerNavigation'
+const IS_IOS = Platform.OS === 'ios'
 
 export default class App extends Component {
   constructor(props){
@@ -61,44 +63,12 @@ export default class App extends Component {
     let { store, isLoad, message } = this.state
     if(message !== "ok"){
       return ( <Login message={message} onRetryPress={this.initData}/> )
-    }else 
-    if(!isLoad && !IS_IOS){
-      return ( <View style={{flex: 1}}><ProgressBarAndroid/></View> )
-    }else if(!isLoad && IS_IOS){
-      return ( <View style={{flex: 1}}><ProgressViewIOS/></View> )
     }else{
       return (
         <Provider store={store}>
-          <View style={{flex: 1}}>
-            <MyCarousel/>
-            <ListImageUpdate/>
-          </View>
+          <AppNavigator/>
         </Provider>
       )
     }
   }
 }
-
-const styles = StyleSheet.create({
-  border: {
-    justifyContent: "center", 
-    flex: 1, 
-    backgroundColor: "#b08cf9", 
-    alignItems: "center"
-  },
-  container: {
-    width: "50%", 
-    height: "40%", 
-    backgroundColor: "white",
-    borderRadius: 20,
-    alignItems: "center"
-  },
-  logo: {
-    width: "100%", 
-    height: "50%", 
-    borderRadius: 20
-  },
-  title: {
-    fontFamily: "Gotham"
-  }
-})

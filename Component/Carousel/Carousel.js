@@ -3,8 +3,9 @@ import { Text, View, Image, Dimensions, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import Swiper from 'react-native-swiper'
 
-const percentHeight = 0.3
-class MyCarousel extends Component {
+const percentHeight = 1
+const Height = 200
+class Carousel extends Component {
     constructor(props) {
         super(props)
 
@@ -13,7 +14,7 @@ class MyCarousel extends Component {
         this.state = {
             isLandscape: false,
             width: width,
-            height: height * percentHeight,
+            height: Height * percentHeight,
             data: this.props.data
         }
 
@@ -27,7 +28,7 @@ class MyCarousel extends Component {
             this.setState({
                 isLandscape: isLandscape,
                 width: width,
-                height: height * percentHeight
+                height: Height * percentHeight
             })
         }
     }
@@ -35,16 +36,12 @@ class MyCarousel extends Component {
     render() {
         let { width, height, data } = this.state
         return (
-            <View style={{ height: "30%" }} onLayout={this.checkLandScape}>
+            <View style={{ height: height }} onLayout={this.checkLandScape}>
                 <Swiper showsButtons={true} autoplay={true} autoplayTimeout={2.5}>
                     {
                         data.map((prop, index) => (
                             <View key={index}>
                                 <Image style={{ width: width, height: height }} source={{ uri: prop.img }} />
-                                <Text
-                                    style={styles.item}>
-                                    {prop.img}
-                                </Text>
                             </View>
                         ))
                     }
@@ -60,7 +57,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(MyCarousel)
+export default connect(mapStateToProps)(Carousel)
 
 const styles = StyleSheet.create({
     item: {
