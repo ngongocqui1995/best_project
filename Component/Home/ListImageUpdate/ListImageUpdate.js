@@ -16,10 +16,12 @@ class ListImageUpdate extends Component {
         width: width,
         height: Height*percentHeight,
         data: this.props.data,
+        isLoadMore: true
     }
 
     this.checkLandScape = this.checkLandScape.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
+    this.handleLoadMore = this.handleLoadMore.bind(this)
   }
 
 
@@ -52,8 +54,12 @@ class ListImageUpdate extends Component {
 
   keyExtractor = (item, index) => index+"";
 
+  handleLoadMore = (event) => {
+    this.setState({ isLoadMore: !this.state.isLoadMore })
+  }
+
   render() {
-    let { data } = this.state
+    let { data, isLoadMore } = this.state
     return (
       <View style={{flex: 1}} onLayout={this.checkLandScape}>
         <FlatList
@@ -62,9 +68,9 @@ class ListImageUpdate extends Component {
           keyExtractor={this.keyExtractor}
           renderItem={this.renderItem}
           ListHeaderComponent={<Carousel/>}
-          ListFooterComponent={<LoadMore/>}
+          ListFooterComponent={<LoadMore isLoadMore={isLoadMore}/>}
           onEndReachedThreshold={0.1}
-          onEndReached={()=>{ console.log("AAAAAAAAAAAAAAAAAAAAAA") }}
+          onEndReached={this.handleLoadMore}
         />
       </View>
     )

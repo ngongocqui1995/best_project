@@ -10,9 +10,6 @@ export default class HeaderMain extends Component {
                     <Image source={require('../../public/assets/img/menu-button.png')}></Image>
                 </TouchableOpacity>
                 <TextInput style={styles.txtInput}></TextInput>
-                <TouchableOpacity style={styles.btnMicro} onPress={() => drawerNavigation.openDrawer()}>
-                    <Image source={require('../../public/assets/img/radio-microphone.png')}></Image>
-                </TouchableOpacity>
             </View>
         )
     }
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
     txtInput: {
         marginTop: 30,
         marginBottom: 10,
-        marginRight: 5,
+        marginRight: 10,
         marginLeft: 5,
         backgroundColor: "white",
         flex: 1,
